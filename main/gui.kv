@@ -1,0 +1,77 @@
+
+#: import Factory kivy.factory.Factory
+
+<TwoLineAvatarIconListItem>:
+    on_release: app.presser(self, self.id)
+    secondary_theme_text_color : "Custom"
+    secondary_text_color: 1, 1, 1, 1
+    
+    ImageLeftWidget:
+        source: "img\icons8-burger-91.png"
+        on_release: app.popup(Factory.Popup())
+
+
+<firstwindow>:
+    name: "primeira" 
+    titulo:titulo
+    descricao:descricao
+
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        GridLayout:
+            cols: 2
+            size: root.width, root.height
+            Label:
+                text: "Titulo: "
+            TextInput:
+                id: titulo
+                multiline: True
+                text: "Insira o titulo aqui"
+
+            Label:
+                text: "Descrição: "
+            TextInput:
+                id: descricao
+                multiline: True
+                text: "Insira a Descrição aqui"
+        Button:
+            id: botao
+            text: "Criar"
+            on_press: app.press_lista() 
+            backgroud_normal : ""
+            background_color: (194/250,133/250,0,1)
+        Button:
+            id: botao_passar
+            text: "Selecionar Exercicios"
+            on_press: app.root.current = "segunda" 
+            backgroud_normal : ""
+            background_color: (194/250,133/250,0,1)
+
+<secondwindow>:
+    size: root.width, root.height
+    name: "segunda"      
+    BoxLayout:
+        orientation: "horizontal"
+        #size: root.width, root.height
+        ScrollView:  
+            #size: root.width, root.height
+            MDList:
+                #size: root.width, root.height
+                id: lista
+            
+        Button:
+            size_hint: 0.5, 0.10
+            text: "Adicionar Exercicios a Lista"
+            on_release: app.relacionar_lista()
+
+<Popup@Popup>:
+    id: popup
+    size_hint: .5, .5 
+    auto_dismiss: True
+    title: "popup"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: label_pop_up
+            text:""

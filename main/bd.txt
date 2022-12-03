@@ -1,0 +1,55 @@
+CREATE TABLE lista (
+    descricao VARCHAR,
+    titulo VARCHAR,
+    lista_id INTEGER PRIMARY KEY
+);
+
+
+
+CREATE TABLE atividade (
+    enunciado VARCHAR,
+    tamanho_x INTEGER,
+    atividade_id INTEGER PRIMARY KEY,
+    tamanho_y INTEGER,
+    tipo_colecao CHAR,
+    dicas VARCHAR,
+    tipo_atividade INTEGER
+);
+
+
+CREATE TABLE resposta (
+    valor CHAR,
+    posicao INTEGER,
+    sequencial INTEGER,
+    atividade_id INTEGER,
+    PRIMARY KEY (sequencial)
+  	FOREIGN KEY (atividade_id)
+	REFERENCES atividade (atividade_id)
+);
+
+
+
+CREATE TABLE lista_atividades (
+    fk_atividade_id INTEGER,
+    fk_lista_id INTEGER,
+  	FOREIGN KEY (fk_atividade_id) REFERENCES atividade (aatividade_id)
+	ON DELETE RESTRICT
+    FOREIGN KEY (fk_lista_id)
+    REFERENCES lista (lista_id)
+    ON DELETE SET NULL
+);
+
+CREATE TABLE lista_teste (
+    nome VARCHAR,
+    idade INTEGER,
+    email VARCHAR
+);
+
+
+lista = [('Gabriel', 19,'gasl2801@gmail.com'),('Kyoma', 24, 'institute@gmail.com'),('christina', 22, 'chr@gmail.com')]
+c.executemany("INSERT INTO lista_teste VALUES (?,?,?)", lista)
+#conn.commit()
+
+#c.execute("SELECT nome FROM lista_teste")
+#listaimprimir=c.fetchone()[0]
+#print(listaimprimir)
